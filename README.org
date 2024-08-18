@@ -1,0 +1,24 @@
+#+title: Power Profiles for StumpWM
+
+* Purpose
+Control Power Profiles Daemon from StumpWM menu.
+
+This module provides command ~power-profiles~ that shows the corresponding menu
+with available profiles, the active profile, allowing to change it.
+
+* Install
+** Prerequisites
+This module allows to control power profiles in the same way ~powerprofilesctl~
+and GNOME does, using DBus service ~org.freedesktop.UPower.PowerProfiles~. Therefore,
+make sure following things are installed:
+- ~$ which powerprofilesctl~
+- ~(ql:quickload "dbus")~
+** Install module
+Download it somewhere, add to the modules load path, then load:
+#+begin_src lisp
+(add-to-load-path "~/opt/stumpwm-power-profiles")
+(load-module "stumpwm-power-profiles")
+#+end_src
+
+* Usage
+Command ~power-profiles~.
