@@ -28,7 +28,7 @@
 (defun menu-items (profiles active-profile)
   (mapcar #'(lambda (item)
 	      (let ((item (second (assoc "Profile" item :test #'string=))))
-		(cons (format nil "~c ~a"
+		(list (format nil "~c ~a"
 			      (if (string= item active-profile) #\* #\Space)
 			      (string-capitalize (substitute #\Space #\- item)))
 		      item)))
@@ -37,12 +37,13 @@
 (defun select-from-profiles-menu ()
   (let* ((active (get-active-profile))
 	 (items (menu-items (get-profiles) active))
-         (profile (cdr (select-from-menu (current-screen)
-					 items
-					 *menu-prompt*
-					 (position-if #'(lambda (x)
-							  (string= (cdr x) active))
-						      items)))))
+         (profile (second (select-from-menu
+			   (current-screen)
+			   items
+			   *menu-prompt*
+			   (position-if #'(lambda (x)
+					    (string= (second x) active))
+					items)))))
     (when (not (string= profile active))
       profile)))
 
